@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from "react";
 import db from "../firebase";
 import { Table, Button, Card, message } from "antd";
-import { navigate } from "@reach/router";
+import { Link, navigate } from "@reach/router";
 import { post } from "axios";
+import { redataStore } from "./Store";
 
 export default function ViewRegistered(props) {
+  const redata = redataStore.useState((s) => s.data);
+  console.log("redata", redata)
+
   console.log(props.lock);
   const [data, setdata] = useState([]);
   const [logsAttendeeCount, setLogsAttendeeCount] = useState(0);
@@ -66,20 +70,22 @@ export default function ViewRegistered(props) {
             Mobile: Number(data.whatsapp),
             "Upasna Kendra": data.uk,
             autUser: data.autUser,
+            id: data.autUser.uid,
             timestamp: data.timestamp,
           };
         });
         console.log("documents", documents);
+        redataStore.update((s) => {
+          documents.forEach((elm) => delete elm.autUser);
+          console.log('redataStore')
+          s.data = [...documents]
+        });
         setdata(documents);
         setLogsRegisterCount(c1);
         setLogsQuestionsCount(c2);
         setLogsAttendeeCount(c3);
       });
-    db.collection("meetings")
-      .doc(props.id)
-      .get()
-      .then(console.log)
-      .catch(console.log);
+
   }, []);
 
   return (
@@ -117,6 +123,7 @@ export default function ViewRegistered(props) {
             ? "Cannot Export meeting is not locked by admin"
             : "Export"}
         </Button>
+        <Link to="/rearrange"><Button>Arrange</Button></Link>
       </Card>
       <Table dataSource={data} columns={columns} />
     </div>

@@ -16,6 +16,7 @@ import EditMeeting from "./EditMeeting.jsx";
 import ActiveMeetings from "./AtiveMeetings.jsx";
 import InActiveMeetings from "./InActiveMeetings.jsx";
 import ViewRegistered from "./ViewRegistered.jsx";
+import ReArrange from "./ReArrange.jsx";
 
 export default function App() {
   const user = userStore.useState((s) => s.user);
@@ -68,6 +69,7 @@ export default function App() {
                 <ActiveMeetings path="/meetings/active" />
                 <InActiveMeetings path="/meetings/inactive" />
                 <ViewRegistered path="/view/:id/:lock" />
+                <ReArrange path="/rearrange"/>
               </>
             )}
           </Router>

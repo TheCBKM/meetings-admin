@@ -1,6 +1,11 @@
 import { Store } from "pullstate";
 import { auth } from "../firebase";
 
+export const redataStore = new Store({
+  data: [],
+});
+
+
 export const userStore = new Store({
   user: false,
 });
