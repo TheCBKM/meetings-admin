@@ -123,7 +123,8 @@ export default function ViewRegistered(props) {
             ? "Cannot Export meeting is not locked by admin"
             : "Export"}
         </Button>
-        <Link to="/rearrange"><Button>Arrange</Button></Link>
+        <Button onClick={()=>navigate('/rearrange')} disabled={props.lock == "f" ? true : false}
+        > Arrange</Button>
       </Card>
       <Table dataSource={data} columns={columns} />
     </div>
