@@ -14,7 +14,7 @@ auth.onAuthStateChanged((user) => {
   userStore.update((s) => {
     console.log("auth", user);
     if (user) {
-      if (user.email == "rugved@cbkm.in" || user.email == "shriya@cbkm.in"|| user.email == "sachin@cbkm.in")
+      if (user.email == "rugved@cbkm.in" || user.email == "shriya@cbkm.in"|| user.email == "sachin@cbkm.in"||user.email == "sanhita@cbkm.in")
         s.user = user;
       else auth.signOut();
     } else s.user = user;
