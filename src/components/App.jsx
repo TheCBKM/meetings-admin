@@ -43,19 +43,25 @@ export default function App() {
             />
             {user && (
               <Menu mode="horizontal">
-                <Menu.Item key="3" icon={<AppstoreOutlined />}>
+                <Menu.Item key="1" icon={<AppstoreOutlined />}>
                   <Link to="/meetings">All Meetings</Link>
                 </Menu.Item>
-                <Menu.Item key="4" icon={<ClockCircleOutlined />}>
+                <Menu.Item key="2" icon={<ClockCircleOutlined />}>
                   <Link to="/meetings/active">Active Meetings</Link>
                 </Menu.Item>
-                <Menu.Item key="5" icon={<StopOutlined />}>
+                <Menu.Item key="3" icon={<StopOutlined />}>
                   <Link to="/meetings/inactive">InActive Meetings</Link>
                 </Menu.Item>
-                <Menu.Item key="2" icon={<EditOutlined />}>
+                <Menu.Item key="4" icon={<EditOutlined />}>
                   <Link to="/create_meeting">Create Meeting</Link>
                 </Menu.Item>
-                <Menu.Item key="1" style={{ float: "right" }} onClick={signOut}>
+                <Menu.Item key="5" icon={<EditOutlined />}>
+                  <Link to="/create_audio">Create Recording</Link>
+                </Menu.Item>
+                <Menu.Item key="6" icon={<EditOutlined />}>
+                  <Link to="/audio">All Recording </Link>
+                </Menu.Item>
+                <Menu.Item key="7" style={{ float: "right" }} onClick={signOut}>
                   <p>Sign Out</p>
                 </Menu.Item>
               </Menu>

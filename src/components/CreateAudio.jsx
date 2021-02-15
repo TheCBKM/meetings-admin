@@ -97,19 +97,19 @@ export default function CreateAudio() {
                     </div>
                     <DatePicker onChange={ondateChange} />
                 </div>
-                <Button size="large" type="primary" onClick={onSubmit}>
-                    Create Audio
-                        </Button>
-                {/* <div
+
+                <div
                     className="post_input_button"
                     style={{ float: "right", margin: 20 }}
                 >
-                    {user.email == "rugved@cbkm.in" ? (
-                        
+                    {user.email == "sanhita@cbkm.in" ? (
+                        <Button size="large" type="primary" onClick={onSubmit}>
+                            Create Audio
+                        </Button>
                     ) : (
                             `${user.displayName} You are not authorized to do this `
                         )}
-                </div> */}
+                </div>
             </div>
         </div>
     )
