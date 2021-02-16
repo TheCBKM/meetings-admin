@@ -9,6 +9,7 @@ import db from "../firebase";
 
 import TextArea from "antd/lib/input/TextArea";
 import { userStore } from "./Store";
+import { navigate } from "@reach/router";
 
 export default function EditAudio(props) {
       const user = userStore.useState((s) => s.user);
@@ -57,7 +58,7 @@ export default function EditAudio(props) {
             .doc(props.id)
             .update(data)
             .then(() => {
-                navigate("/meetings");
+                navigate("/audio");
             });
     }
     return (
@@ -112,9 +113,7 @@ export default function EditAudio(props) {
                     {date.toDate().toString().substring(0, 15)}
                 </div>
                 <br />
-                <Button size="large" type="primary" onClick={onSubmit}>
-                    Update Audio
-                        </Button>
+               
                 <div
                     className="post_input_button"
                     style={{ float: "right", margin: 20 }}

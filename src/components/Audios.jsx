@@ -8,7 +8,7 @@ export default function Audios() {
     const [audios, setaudios] = useState([]);
     useEffect(() => {
         db.collection("audio")
-            .orderBy("timestamp", "asc")
+            .orderBy("date", "desc")
             .onSnapshot(async (snap) => {
                 let documents = await snap.docs.map((post) => {
                     let data = post.data();

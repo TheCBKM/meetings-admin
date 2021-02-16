@@ -11,6 +11,9 @@ import { userStore } from "./Store";
 import TextArea from "antd/lib/input/TextArea";
 
 export default function CreateAudio() {
+    const user = userStore.useState((s) => s.user);
+
+
     const [id, setid] = useState('')
     const onidChange = (e) => setid(event.target.value);
 
@@ -44,7 +47,7 @@ export default function CreateAudio() {
         db.collection("audio")
             .add(data)
             .then(() => {
-                navigate("/meetings");
+                navigate("/audio");
             });
     }
     return (
@@ -104,7 +107,7 @@ export default function CreateAudio() {
                 >
                     {user.email == "sanhita@cbkm.in" ? (
                         <Button size="large" type="primary" onClick={onSubmit}>
-                            Create Audio
+                            Create Meeting
                         </Button>
                     ) : (
                             `${user.displayName} You are not authorized to do this `
