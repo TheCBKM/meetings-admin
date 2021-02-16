@@ -58,7 +58,7 @@ export default function App() {
                 <Menu.Item key="5" icon={<EditOutlined />}>
                   <Link to="/create_audio">Create Recording</Link>
                 </Menu.Item>
-                <Menu.Item key="6" icon={<EditOutlined />}>
+                <Menu.Item key="6" icon={<AppstoreOutlined />}>
                   <Link to="/audio">All Recording </Link>
                 </Menu.Item>
                 <Menu.Item key="7" style={{ float: "right" }} onClick={signOut}>

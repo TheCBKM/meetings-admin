@@ -112,6 +112,9 @@ export default function CreateAudio() {
                     ) : (
                             `${user.displayName} You are not authorized to do this `
                         )}
+                        <br/><br/>
+                        <br/><br/>
+
                 </div>
             </div>
         </div>
