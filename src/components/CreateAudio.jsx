@@ -107,7 +107,7 @@ export default function CreateAudio() {
                 >
                     {user.email == "sanhita@cbkm.in" ? (
                         <Button size="large" type="primary" onClick={onSubmit}>
-                            Create Meeting
+                            Create Audio
                         </Button>
                     ) : (
                             `${user.displayName} You are not authorized to do this `
