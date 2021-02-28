@@ -13,6 +13,7 @@ import { navigate } from "@reach/router";
 
 export default function EditAudio(props) {
       const user = userStore.useState((s) => s.user);
+      const playerRef = React.useRef(null)
 
     const [id, setid] = useState('')
     const onidChange = (e) => setid(event.target.value);
@@ -24,6 +25,12 @@ export default function EditAudio(props) {
     const ondescChange = (e) => setdesc(event.target.value);
 
     const [date, setdate] = useState(firebase.firestore.Timestamp.now())
+
+    const [timestamp, settimestamp] = useState('')
+    const ontimestampChange = (e) => settimestamp(event.target.value);
+
+    const [timeStamps, settimeStamps] = useState([])
+
     const ondateChange = (_, datestring) => {
         setdate(firebase.firestore.Timestamp.fromDate(new Date(datestring)))
     }
@@ -35,12 +42,18 @@ export default function EditAudio(props) {
             .then((snap) => {
                 console.log(snap.data());
                 let {
-                    id, title, description, date
+                    id, title, description, date,ts
                 } = snap.data();
                 setid(id),
                     settitle(title),
                     setdate(date),
                     setdesc(description.replaceAll('\\n', '\n'))
+                    settimeStamps(ts||[])
+                    let str=''
+                    ts && ts.map(t=>{
+                        str+=`${t.title} @T ${t.time}`
+                    })
+                    settimestamp(str)
             });
     }, []);
 
@@ -51,6 +64,7 @@ export default function EditAudio(props) {
             description: desc.replaceAll("\n", "\\n"),
             id,
             title,
+            ts:timeStamps,
             timestamp: firebase.firestore.Timestamp.now(),
         };
         console.log(data)
@@ -72,6 +86,7 @@ export default function EditAudio(props) {
                         <Input placeholder="ID" value={id} onChange={onidChange} />
                     </div>
                     <AudioPlayer
+                    ref={playerRef}
                         customAdditionalControls={[]}
                         src={`https://docs.google.com/uc?export=download&id=${id}`}
                         onCanPlay={e => { console.log("onCanPlay") }}
@@ -104,7 +119,49 @@ export default function EditAudio(props) {
                     <ReactMarkdown>{desc}</ReactMarkdown>
 
                 </div>
+ <div className="post_input_container">
+                    <div className="post_input_title">
+                        <h2>Time Stamps</h2>
+                    </div>
+                    <div className="post_input_value">
+                        <TextArea required={true}
+                            placeholder="Title @T hh:mm:ss"
+                            rows="3" cols="10"
+                            style={{ whiteSpace: "pre-wrap" }}
+                            onChange={ontimestampChange}
+                            allowClear={true}
+                            value={timestamp}
 
+                        />
+                        <Button onClick={() => {
+
+                            let ts = []
+                            let stamps = timestamp.trim().split("\n")
+                            stamps.map(s => {
+                                let x = s.split('@T')
+                                if (x.length == 2 && x[0].trim().length > 0 && x[1].trim().length == 8) {
+                                    ts.push({ title: x[0].trim(), time: x[1].trim() })
+                                }
+                            })
+                            settimeStamps(ts)
+                            console.log(ts)
+                        }}>Show</Button>
+                    </div>
+                    {timeStamps.map(ts => <div>
+                        {ts.title}&nbsp;&nbsp;{
+                            ts.time.split(':').map((t,i)=><span>{Number(t)>0?`${t}${i==2?"":":"}`:""}</span>) 
+                            }&nbsp;&nbsp;
+                        <Button onClick={() => {
+                            var hms = ts.time;
+                            var a = hms.split(':');
+                            var seconds = (+a[0]) * 60 * 60 + (+a[1]) * 60 + (+a[2]);
+                            playerRef.current.audio.current.currentTime = seconds
+                        }}>Play</Button>
+
+                        <br />
+
+                    </div>)}
+                </div>
                 <div className="post_input_container">
                     <div className="post_input_title">
                         <h2>Date</h2>
