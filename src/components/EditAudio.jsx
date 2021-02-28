@@ -51,7 +51,7 @@ export default function EditAudio(props) {
                     settimeStamps(ts||[])
                     let str=''
                     ts && ts.map(t=>{
-                        str+=`${t.title} @T ${t.time}`
+                        str+=`${t.title} @T ${t.time}\n`
                     })
                     settimestamp(str)
             });
