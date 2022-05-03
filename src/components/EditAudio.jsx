@@ -88,7 +88,7 @@ export default function EditAudio(props) {
                     <AudioPlayer
                     ref={playerRef}
                         customAdditionalControls={[]}
-                        src={`https://docs.google.com/uc?export=download&id=${id}`}
+                        src={id.includes('ipfs')?id:`https://docs.google.com/uc?export=download&id=${id}`}
                         onCanPlay={e => { console.log("onCanPlay") }}
                     />
                 </div>
