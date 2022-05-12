@@ -77,7 +77,7 @@ export default function CreateAudio() {
                         timeFormat='hh:mm:ss'
                         ref={playerRef}
                         customAdditionalControls={[]}
-                        src={id.includes('http')?id:`https://docs.google.com/uc?export=download&id=${id}`}
+                        src={id.includes('meeting')?id:`https://docs.google.com/uc?export=download&id=${id}`}
                         onCanPlay={e => { console.log("onCanPlay") }}
                     />
                 </div>
