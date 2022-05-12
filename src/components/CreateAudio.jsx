@@ -77,7 +77,7 @@ export default function CreateAudio() {
                         timeFormat='hh:mm:ss'
                         ref={playerRef}
                         customAdditionalControls={[]}
-                        src={id.includes('ipfs')?id:`https://docs.google.com/uc?export=download&id=${id}`}
+                        src={id.includes('pinata')?id:`https://docs.google.com/uc?export=download&id=${id}`}
                         onCanPlay={e => { console.log("onCanPlay") }}
                     />
                 </div>
